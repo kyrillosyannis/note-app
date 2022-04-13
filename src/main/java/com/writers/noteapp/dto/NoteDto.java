@@ -12,7 +12,6 @@ import lombok.Setter;
 public class NoteDto {
 
     private Long id;
-    private String name;
     private String content;
     private Long userId;
 }
