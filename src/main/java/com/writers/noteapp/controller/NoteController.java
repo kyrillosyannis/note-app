@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +28,9 @@ public class NoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NoteDto> create(NoteDto noteDto) {
+    public ResponseEntity<NoteDto> create(@RequestBody NoteDto noteDto) {
         log.info("Saving note");
-        noteService.save(noteDto);
+        noteDto = noteService.save(noteDto);
         return new ResponseEntity<>(noteDto, HttpStatus.CREATED);
     }
 
@@ -37,5 +39,13 @@ public class NoteController {
         log.info("Deleting note with id: {}", id);
         noteService.deleteById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NoteDto> update(@PathVariable(name = "id") Long id,
+                                          @RequestBody NoteDto noteDto) {
+        log.info("Updating note with id: {}", id);
+        noteDto = noteService.save(noteDto);
+        return new ResponseEntity<>(noteDto, HttpStatus.OK);
     }
 }
