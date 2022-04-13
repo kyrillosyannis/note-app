@@ -29,4 +29,10 @@ public class NoteService {
         log.info("Save note end");
         return noteDto;
     }
+
+    public void deleteById(Long id) {
+        log.info("Delete note with id: {} start", id);
+        noteRepository.deleteById(id);
+        log.info("Delete note with id: {} end", id);
+    }
 }
