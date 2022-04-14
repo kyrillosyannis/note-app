@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Builder
 @EqualsAndHashCode
 @Entity
-@Table
+@Table(name = "notes")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Note {
