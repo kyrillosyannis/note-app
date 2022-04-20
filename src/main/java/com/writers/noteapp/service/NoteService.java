@@ -27,6 +27,7 @@ public class NoteService {
         this.conversionService = conversionService;
     }
 
+    //TODO add error handling when note is larger than db column size
     public NoteDto save(NoteDto noteDto) {
         log.info("Save note start");
         Note note = conversionService.convert(noteDto, Note.class);
